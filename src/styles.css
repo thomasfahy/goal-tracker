@@ -311,6 +311,11 @@ input#detailStepInput{
   margin-top:6px;
 }
 
+#overallLevel, #overallXp{
+  font-size: 19px;
+  color: #ffca7a;;
+}
+
 .goal-card .next-step {
   display: block;
   margin: 12px 0;
