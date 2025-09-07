@@ -1,0 +1,83 @@
+   :root {
+      --bg: #0b0c10;
+      --card: #15171c;
+      --text: #f2f4f8;
+      --muted: #7a869a;
+      --brand: #7c5cff;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Inter", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .auth-card {
+      background: var(--card);
+      padding: 40px 30px;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      width: 100%;
+      max-width: 380px;
+      text-align: center;
+    }
+
+    .auth-title {
+      margin-bottom: 24px;
+      font-size: 1.8rem;
+      color: var(--text);
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    input {
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #2a2d35;
+      background: #0f1116;
+      color: var(--text);
+      font-size: 1rem;
+    }
+
+    input::placeholder {
+      color: var(--muted);
+    }
+
+    .btn {
+      background: var(--brand);
+      border: none;
+      color: white;
+      padding: 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: background 0.2s;
+    }
+
+    .btn:hover {
+      background: #6849e0;
+    }
+
+    .btn.full {
+      width: 100%;
+    }
+
+    .error {
+      margin-top: 16px;
+      background: #3b0c15;
+      color: #ffb3c2;
+      border: 1px solid #5b1220;
+      padding: 10px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+    }

@@ -1,13 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <title>Goal Tracker</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" type="image/png" href="./images/favicon.png" />
+
 </head>
 <body>
-    <h1>This is working as expected</h1>
-    <h1>Css is working if the background is purple</h1>
-    <h1>JS is working if console shows message</h1>
+  <main class="dashboard">
+    <h1 class="title">Life Goals</h1>
+    <div id="goalList" class="goal-list"></div>
+  </main>
+
+  <!-- Floating Add Goal Button -->
+  <button id="addGoalBtn" class="fab">+</button>
+
+  <!-- Modal -->
+  <div id="goalModal" class="modal hidden">
+    <div class="modal-content">
+      <h2>Add New Goal</h2>
+      <form id="goalForm" class="form">
+        <input type="text" name="title" placeholder="Goal Title" required />
+        <textarea name="description" placeholder="Goal Description" required></textarea>
+        <textarea name="end_goal" placeholder="What is the end goal?" required></textarea>
+        <input type="text" name="first_step" placeholder="What’s the next step?" required />
+        <div class="form-actions">
+          <button type="button" id="cancelBtn" class="btn secondary">Cancel</button>
+          <button type="submit" class="btn">Save Goal</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div id="goalDetailModal" class="modal hidden">
+  <div class="modal-content">
+    <div class="modal-head">
+      <h2 id="detailTitle"></h2>
+      <button id="detailClose" class="btn secondary">Close</button>
+    </div>
+    <p id="detailEndGoal" class="muted"></p>
+    <div class="progress">
+      <div id="progressBar" class="progress-bar"></div>
+    </div>
+    <div class="statline">
+      <span id="detailLevel"></span>
+      <span id="detailXp"></span>
+    </div>
+    <div class="stack">
+      <label class="muted">Next step</label>
+      <input id="detailStepInput" type="text" />
+      <div class="row">
+        <button id="saveStepBtn" class="btn secondary">Save</button>
+        <button id="completeStepBtn" class="btn">Mark Completed</button>
+        <button id="deleteGoalBtn" class="btn danger">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
 </body>
 </html>
