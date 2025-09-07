@@ -13,6 +13,20 @@ function authHeaders() {
   };
 }
 
+function xpToNext(level){ return 100 + Math.floor(level * 10); }
+
+function normalizeLevelXp(level, xp){
+  let l = level;
+  let x = xp;
+  let t = xpToNext(l);
+  while (x >= t){
+    x -= t;
+    l += 1;
+    t = xpToNext(l);
+  }
+  return { level: l, xp: x, threshold: t, progress: Math.min(x / t, 1) };
+}
+
 export async function pingApi() {
   try {
     const res = await fetch("/api/ping", { headers: { Authorization: "Bearer " + localStorage.getItem("token") } });
@@ -65,17 +79,16 @@ async function loadGoals() {
     if (data.ok && data.goals.length) {
       goalsCache = data.goals;
       data.goals.forEach(g => {
+        const n = normalizeLevelXp(g.level, g.xp);
         const card = document.createElement("div");
         card.className = "goal-card";
         card.dataset.goalId = g.goal_id;
-        const prog = Math.min((g.xp_info ? g.xp_info.progress : g.xp / 100) * 100, 100);
-        const thr = g.xp_info ? g.xp_info.threshold : 100;
         card.innerHTML = `
           <h3>${g.title}</h3>
           <p>${g.description}</p>
           <small>End goal: ${g.end_goal}</small><br/>
-          <small>Level: ${g.level} | XP: ${g.xp} / ${thr}</small>
-          <div class="progress"><div style="width:${prog}%"></div></div>
+          <small>Level: ${n.level} | XP: ${n.xp} / ${n.threshold}</small>
+          <div class="progress"><div class="progress-bar" style="width:${n.progress*100}%; background:#7c5cff"></div></div>
         `;
         card.onclick = () => openGoalDetail(g.goal_id);
         goalList.appendChild(card);
@@ -120,13 +133,12 @@ function openGoalDetail(goalId) {
   const g = goalsCache.find(x => x.goal_id === goalId);
   if (!g) return;
   activeGoalId = goalId;
-  const thr = g.xp_info ? g.xp_info.threshold : 100;
-  const prog = Math.min((g.xp_info ? g.xp_info.progress : g.xp / thr) * 100, 100);
+  const n = normalizeLevelXp(g.level, g.xp);
   detailTitle.textContent = g.title;
   detailEndGoal.textContent = g.end_goal;
-  detailLevel.textContent = "Level " + g.level;
-  detailXp.textContent = `XP ${g.xp} / ${thr}`;
-  progressBar.style.width = prog + "%";
+  detailLevel.textContent = "Level " + n.level;
+  detailXp.textContent = `XP ${n.xp} / ${n.threshold}`;
+  progressBar.style.width = (n.progress*100) + "%";
   progressBar.style.background = "#7c5cff";
   detailStepInput.value = g.current_step ? g.current_step.description : "";
   detailModal.classList.remove("hidden");
