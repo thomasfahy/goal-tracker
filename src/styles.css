@@ -278,6 +278,53 @@ input#detailStepInput{
   margin-bottom: 40px;
 }
 
+.overall-wrap{
+  width:100%;
+  margin:18px 0 24px 0;
+}
+.overall-title{
+  margin:0 0 8px 0;
+  font-size:1.05rem;
+  color:#cfd6e4;
+  letter-spacing:.2px;
+}
+.overall-bar{
+  width:100%;
+  height:14px;
+  background:#0f1116;
+  border:1px solid #2a2d35;
+  border-radius:999px;
+  overflow:hidden;
+  box-shadow:0 0 18px rgba(124,92,255,.25);
+}
+.overall-fill{
+  height:100%;
+  width:0%;
+  background:#7c5cff;
+  transition:width .25s ease;
+}
+.overall-meta{
+  display:flex;
+  justify-content:space-between;
+  color:#9aa4b2;
+  font-size:.9rem;
+  margin-top:6px;
+}
+
+.goal-card .next-step {
+  display: block;
+  margin: 12px 0;
+  padding: 8px 12px;
+  background: rgba(34, 197, 94, 0.15); /* subtle green background */
+  border: 1px solid #22c55e;
+  border-radius: 8px;
+  color: #22c55e;
+  font-weight: 600;
+  text-align: center;
+  font-size: 1rem;
+}
+
+
 
 
 
